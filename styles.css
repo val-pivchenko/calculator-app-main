@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+/* THEME VARIABLES */
+
+:root {
+    --main-background: hsl(222, 26%, 31%);
+    --toggle-keypad-background: hsl(223, 31%, 20%);
+    --screen-background: hsl(224, 36%, 15%);
+    --key-background: hsl(225, 21%, 49%);
+    --key-shadow: hsl(224, 28%, 35%);
+    --key-background-toggle: hsl(6, 63%, 50%);
+    --key-shadow-red: hsl(6, 70%, 34%);
+    --key-background-2: hsl(30, 25%, 89%);
+    --key-shadow-2:  hsl(28, 16%, 65%);
+    --text-1: white; 
+    --text-2: hsl(221, 14%, 31%);;
+    --text-3: white;
+    --text-4: white;
+}
+
+[data-theme="light"] {
+    --main-background: hsl(0, 0%, 90%);
+    --toggle-keypad-background: hsl(0, 5%, 81%);
+    --screen-background: hsl(0, 0%, 93%);
+    --key-background: hsl(185, 42%, 37%);
+    --key-shadow: hsl(185, 58%, 25%);
+    --key-background-toggle: hsl(25, 98%, 40%);
+    --key-shadow-red: hsl(25, 99%, 27%);
+    --key-background-2: hsl(45, 7%, 89%);
+    --key-shadow-2:  hsl(35, 11%, 61%);
+    --text-1: hsl(60, 10%, 19%);
+    --text-2: hsl(60, 10%, 19%);
+    --text-3: white;
+    --text-4: white;
+}
+
+[data-theme="purple"] {
+    --main-background: hsl(268, 75%, 9%);
+    --toggle-keypad-background: hsl(268, 71%, 12%);
+    --screen-background: hsl(268, 71%, 12%);
+    --key-background: hsl(281, 89%, 26%);
+    --key-shadow: hsl(285, 91%, 52%);
+    --key-background-toggle: hsl(176, 100%, 44%);
+    --key-shadow-red: hsl(177, 92%, 70%);
+    --key-background-2: hsl(268, 47%, 21%);
+    --key-shadow-2:  hsl(290, 70%, 36%);
+    --text-1: hsl(52, 100%, 62%);
+    --text-2: hsl(52, 100%, 62%);
+    --text-3: hsl(198, 20%, 13%);
+    --text-4: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1rem;
+    font-family: 'Spartan', sans-serif;
+    background: var(--main-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.app-wrap {
+    max-width: 22rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* HEADER */
+
+header {
+    margin-top: 1rem;
+    padding: 1rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text,
+.theme-text,
+.switch-nums {
+    color: var(--text-1);
+}
+
+.switch-wrap {
+    position: relative;
+}
+
+.theme-text {
+    font-size: .8rem;
+    position: absolute;
+    top: 1.15rem;
+    right: 6rem;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+}
+
+
+/* THEME SWITCH */
+.switch-nums {
+    font-size: 0.7rem;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.switch-wrap {
+    width: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle { 
+    outline: none;
+    padding: .7rem .3rem;
+    -webkit-appearance: none;
+    background-color: var(--toggle-keypad-background);
+    width: 100%;
+    height: 22px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.toggle::-webkit-slider-thumb { 
+    -webkit-appearance: none;
+    background-color: var(--key-background-toggle);
+    opacity: 1;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: 300ms;
+}
+
+/* RESULT */
+
+.result {
+    margin-top: 1rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 10px;
+    width: 100%;
+    height: 80px;
+    background-color: var(--screen-background);
+}
+
+.res-text {
+    color: var(--text-1);
+    font-size: 32px;
+}
+
+/* BUTTONS */
+
+.buttons {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: var(--toggle-keypad-background);
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+}
+
+.reset { grid-area: 5 / 1 / 6 / 3; }
+.equals { grid-area: 5 / 3 / 6 / 5; }
+
+.buttons button {
+    outline: none;
+    background-color: var(--key-background-2);
+    box-shadow: 0px 3px 0px 0px var(--key-shadow-2);
+    border-radius: 10px;
+    border: none;
+    width: auto;
+    height: 4rem;
+    font-family: 'Spartan', sans-serif;
+    color: var(--text-2);
+    font-size: 32px;
+    transition: 100ms;
+}
+
+.buttons button:active {
+    box-shadow:none;
+    margin-top: 3px;
+    margin-bottom: -3px;
+}
+
+.reset,
+.equals,
+.delete {
+    font-size: 20px !important;
+    width: 100% !important;
+}
+
+.reset {
+    background-color: var(--key-background) !important;
+    color: var(--text-4) !important;
+    box-shadow: 0px 3px 0px 0px var(--key-shadow) !important;
+}
+
+.reset:active,
+.delete:active,
+.equals:active {
+    box-shadow:none !important;
+}
+
+.delete {
+    background-color: var(--key-background) !important;
+    color: var(--text-4) !important;
+    box-shadow: 0px 3px 0px 0px var(--key-shadow) !important;
+}
+
+.equals {
+    background-color: var(--key-background-toggle) !important;
+    color: var(--text-3) !important;
+    box-shadow: 0px 3px 0px 0px var(--key-shadow-red) !important;
+}
+
+/* DESKTOP MEDIA QUERY */
+
+@media only screen and (min-width: 768px) {
+    .app-wrap {
+        max-width: 40rem;
+    }
+
+    .buttons {
+        padding: 2rem;
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+    }
+}

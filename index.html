@@ -1,26 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" href="/calculator-app-main/styles.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+
   <title>Frontend Mentor | Calculator app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
   </style>
 </head>
+
 <body>
+  <div class="app-wrap">
+    <header>
+      <h1 class="logo-text">calc</h1>
 
+      <div class="switch-wrap">
+        <p class="theme-text">THEME</p>
+        <div class="switch-nums">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </div>
+        <input id="toggle" class="toggle" type="range" min="1" max="3" value="1" step="1">
+      </div>
+    </header>
 
-  
-  <div class="attribution">
+    <div class="result">
+      <p class="res-text"></p>
+    </div>
+
+    <div class="buttons">
+      <button class="num-button">7</button>
+      <button class="num-button">8</button>
+      <button class="num-button">9</button>
+      <button class="delete">DEL</button>
+
+      <button class="num-button">4</button>
+      <button class="num-button">5</button>
+      <button class="num-button">6</button>
+      <button class="plus">+</button>
+
+      <button class="num-button">1</button>
+      <button class="num-button">2</button>
+      <button class="num-button">3</button>
+      <button class="minus">-</button>
+
+      <button class="num-button dot-btn">.</button>
+      <button class="num-button">0</button>
+      <button class="divide">/</button>
+      <button class="times">x</button>
+
+      <button class="reset">RESET</button>
+      <button class="equals">=</button>
+    </div>
+  </div>
+
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
+  <script src="/calculator-app-main/app.js"></script>
 </body>
+
 </html>
