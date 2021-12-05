@@ -139,7 +139,7 @@ function equalsFunc() {
         resultWindow.innerHTML = firstValue - secondValue;
     } else if (operator === '/') {
         resultWindow.innerHTML = firstValue / secondValue;
-        if (resultWindow.innerHTML.includes('.')) {
+        if (resultWindow.innerHTML.includes('.') && resultWindow.innerHTML.length > 12) {
             resultWindow.innerHTML = (firstValue / secondValue).toFixed(5)
         }
     } else if (operator === '*') {
