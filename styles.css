@@ -135,7 +135,6 @@ header {
     width: 100%;
     height: 22px;
     border-radius: 50px;
-    transition: 0.3s;
 }
 
 .toggle::-webkit-slider-thumb { 
@@ -145,7 +144,6 @@ header {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    transition: 300ms;
 }
 
 /* RESULT */

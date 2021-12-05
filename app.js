@@ -1,3 +1,8 @@
+// TO DO
+
+// FIGURE OUT MULTIPLE OPERATORS INPUT SO USER DOESN'T HAVE TO CLICK EQUALS EVERY TIME
+
+
 const toggleSwitch = document.querySelector('.toggle');
 
 const buttons = document.querySelectorAll('.num-button')
@@ -26,6 +31,8 @@ let secondValue = 0;
 
 let operator;
 
+let result;
+
 
 // SWITCH THEME FUNC
 
@@ -48,6 +55,9 @@ toggleSwitch.addEventListener('change', switchTheme);
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         resultWindow.innerHTML += button.innerHTML;
+        if (resultWindow.innerHTML.length > 12) {
+            resultWindow.innerHTML = resultWindow.innerHTML.slice(0, -1)
+        }
     });
 })
 
@@ -82,8 +92,8 @@ function asignToSecond() {
 // DOT
 
 function dotFunc() {
-    if (resultWindow.innerHTML.includes('.') === true) {
-        resultWindow.innerHTML.replace('.', '.')
+    if (!resultWindow.innerHTML.includes('.')) {
+        resultWindow.innerHTML += dotButton.innerHTML;
     }
 }
 
@@ -129,9 +139,16 @@ function equalsFunc() {
         resultWindow.innerHTML = firstValue - secondValue;
     } else if (operator === '/') {
         resultWindow.innerHTML = firstValue / secondValue;
+        if (resultWindow.innerHTML.includes('.')) {
+            resultWindow.innerHTML = (firstValue / secondValue).toFixed(5)
+        }
     } else if (operator === '*') {
         resultWindow.innerHTML = firstValue * secondValue;
     }
+    if (resultWindow.innerHTML.length > 12) {
+        resultWindow.innerHTML = 'Too long'
+    }
+
     firstValue = 0;
     secondValue = 0;
 }
