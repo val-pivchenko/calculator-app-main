@@ -25,14 +25,98 @@ const equalsButton = document.querySelector('.equals')
 
 const dotButton = document.querySelector('.dot-btn')
 
-let firstValue = 0;
+const operators = {
+    PLUS: 'plus',
+    MINUS: 'minus',
+    DIVIDE: 'divide',
+    MULTIPLY: 'multiply'
+};
 
-let secondValue = 0;
+const defaultValue = null;
 
-let operator;
+let userInputValue = defaultValue;
 
-let result;
+let selectedOperator = '';
 
+let result = defaultValue;
+
+let readyToCalc = false;
+
+
+
+// EVENTS
+
+toggleSwitch.addEventListener('change', switchTheme);
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        resultWindow.innerHTML += button.innerHTML;
+        if (resultWindow.innerHTML.length > 12) {
+            resultWindow.innerHTML = resultWindow.innerHTML.slice(0, -1)
+        }
+        userInputValue = parseFloat(resultWindow.innerHTML);
+        readyToCalc = !!(selectedOperator && userInputValue !== defaultValue);
+    });
+})
+
+deleteButton.addEventListener('click', deleteFunc);
+
+dotButton.addEventListener('click', dotFunc);
+
+resetButton.addEventListener('click', resetFunc);
+
+plusButton.addEventListener('click', () => operatorFunc(operators.PLUS));
+
+minusButton.addEventListener('click', () => operatorFunc(operators.MINUS));
+
+divideButton.addEventListener('click', () => operatorFunc(operators.DIVIDE));
+
+timesButton.addEventListener('click', () => operatorFunc(operators.MULTIPLY));
+
+equalsButton.addEventListener('click', equalsFunc);
+
+function calculate() {
+    if (selectedOperator === operators.PLUS) {
+        result += userInputValue;
+    } else if (selectedOperator === operators.MINUS) {
+        result -= userInputValue;
+    } else if (selectedOperator === operators.MULTIPLY) {
+        result *= userInputValue;
+    } else if (selectedOperator === operators.DIVIDE) {
+        result /= userInputValue;
+        if (result.toString().includes('.') && result.toString().length > 9) {
+            result = result.toFixed(5)
+        }
+    }
+    readyToCalc = false;
+
+}
+
+function operatorFunc(operator) {
+    if (readyToCalc) {
+        calculate();
+    } else if (result === defaultValue && userInputValue !== defaultValue) {
+        result = userInputValue;
+    }
+    selectedOperator = operator;
+    clear();
+}
+
+function equalsFunc() {
+    calculate();
+    resultWindow.innerHTML = result;
+    if (resultWindow.innerHTML.length > 12) {
+        resultWindow.innerHTML = 'Too long'
+    }
+}
+
+// DOT
+
+function dotFunc() {
+    if (!resultWindow.innerHTML.includes('.')) {
+        resultWindow.innerHTML += dotButton.innerHTML;
+    }
+}
 
 // SWITCH THEME FUNC
 
@@ -47,119 +131,6 @@ function switchTheme() {
         document.documentElement.setAttribute('data-theme', 'purple');
     }
 }
-
-// EVENTS
-
-toggleSwitch.addEventListener('change', switchTheme);
-
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        resultWindow.innerHTML += button.innerHTML;
-        if (resultWindow.innerHTML.length > 12) {
-            resultWindow.innerHTML = resultWindow.innerHTML.slice(0, -1)
-        }
-    });
-})
-
-deleteButton.addEventListener('click', deleteFunc);
-
-dotButton.addEventListener('click', dotFunc);
-
-resetButton.addEventListener('click', resetFunc);
-
-plusButton.addEventListener('click', plusFunc);
-
-minusButton.addEventListener('click', minusFunc);
-
-divideButton.addEventListener('click', divideFunc);
-
-timesButton.addEventListener('click', timesFunc);
-
-equalsButton.addEventListener('click', equalsFunc);
-
-// ASIGN INPUT TO VARIABLE
-
-function asignToFirst() {
-    firstValue += parseFloat(resultWindow.innerHTML);
-}
-
-// ASIGN 2ND INPUT TO VARIABLE
-
-function asignToSecond() {
-    secondValue += parseFloat(resultWindow.innerHTML);
-}
-
-// DOT
-
-function dotFunc() {
-    if (!resultWindow.innerHTML.includes('.')) {
-        resultWindow.innerHTML += dotButton.innerHTML;
-    }
-}
-
-// PLUS
-
-function plusFunc() {
-    asignToFirst();
-    clear();
-    operator = '+';
-}
-
-// MINUS
-
-function minusFunc() {
-    asignToFirst();
-    clear();
-    operator = '-';
-}
-
-// DIVIDE
-
-function divideFunc() {
-    asignToFirst();
-    clear();
-    operator = '/';
-}
-
-// TIMES
-
-function timesFunc() {
-    asignToFirst();
-    clear();
-    operator = '*';
-}
-
-// EQUALS
-
-function equalsFunc() {
-    asignToSecond();
-    if (operator === '+') {
-        resultWindow.innerHTML = firstValue + secondValue;
-    } else if (operator === '-') {
-        resultWindow.innerHTML = firstValue - secondValue;
-    } else if (operator === '/') {
-        resultWindow.innerHTML = firstValue / secondValue;
-        if (resultWindow.innerHTML.includes('.') && resultWindow.innerHTML.length > 12) {
-            resultWindow.innerHTML = (firstValue / secondValue).toFixed(5)
-        }
-    } else if (operator === '*') {
-        resultWindow.innerHTML = firstValue * secondValue;
-    }
-    if (resultWindow.innerHTML.length > 12) {
-        resultWindow.innerHTML = 'Too long'
-    }
-
-    firstValue = 0;
-    secondValue = 0;
-}
-
-
-
-
-
-
-
-
 
 // CLEAR RESULT WINDOW AFTER MATH OPERATOR CLICK
 
@@ -178,5 +149,7 @@ function deleteFunc() {
 
 function resetFunc() {
     resultWindow.innerHTML = '';
-    resultVariable = 0;
+    userInputValue = 0;
+    result = defaultValue;
+    selectedOperator = '';
 }
